@@ -8,8 +8,13 @@ point-cloud reconstructions for all nine in-house sequences.
 From this directory:
 
 ```sh
-python3 -m http.server 8000 --bind 127.0.0.1
+python3 scripts/serve.py
 ```
+
+The server supports HTTP byte-range requests, which browsers need to seek
+reliably in MP4s. Use this script instead of `python3 -m http.server`; the
+standard server can reset the playhead to the beginning when seeking. Stop it
+with Ctrl+C. If the port is occupied, use `python3 scripts/serve.py --port 8001`.
 
 No package installation or frontend build is required. Serve this directory as
 static files to deploy; include `images/processed`, `images/demo`, `main.js`,
@@ -58,6 +63,5 @@ timeline. Without JavaScript the full recording plays. Video files and original
 links are unchanged, and the supplementary demo is not trimmed.
 
 Playback boundaries require hosting with HTTP byte-range support, as provided
-by GitHub Pages. Python's basic `http.server` can serve the page for layout
-checks but does not support reliable media seeking; validate trimming on a
-server that responds to media Range requests with HTTP 206.
+by GitHub Pages and `scripts/serve.py`. Media Range requests receive HTTP 206
+responses from the local server.
