@@ -37,14 +37,17 @@
     </section>
     <section id="system-overview" aria-labelledby="system-overview-title">
       <h2 id="system-overview-title">System overview</h2>
+      <p>
+        The proposed method processes each sample state through three steps. 
+        In sampling, we initialize each sample state according to the motion model with random noise. 
+        In sample-wise optimization, we correct each sample state using the proposed continuous-time registration method (i.e., CT-VGICP). 
+        In selection, we select the representative sample from the sample set weighted based on the proposed CT-VGICP-based sample consensus. 
+        The selected representative state is fed to scan-to-model registration-based odometry estimation that maintains a model point cloud (i.e., local map) to obtain a refined sensor state.
+      </p>
       <figure class="system-figure">
         <a href="images/figures/system.pdf" target="_blank" rel="noopener" aria-label="Open Figure 2: system overview as a full-resolution PDF">
           <img src="images/figures/system.png" width="2400" height="512" alt="System overview: sampling, sample-wise optimization against a local map, and selection of representative hypothesis poses, followed by refinement and a local-map update." loading="lazy" decoding="async">
         </a>
-        <figcaption>
-          <p><strong>Figure 2. System overview.</strong> Each sample state passes through sampling, sample-wise optimization using CT-VGICP, and selection based on sample consensus. The selected representative state is refined by scan-to-model registration using a shared local map.</p>
-          <a href="images/figures/system.pdf" target="_blank" rel="noopener">View full-resolution PDF</a>
-        </figcaption>
       </figure>
     </section>
     <section id="dataset" aria-labelledby="dataset-title">
