@@ -37,7 +37,7 @@
     </section>
     <section id="dataset" aria-labelledby="dataset-title">
       <h2 id="dataset-title">In-house dataset</h2>
-      <p class="intro">Captured with a Livox MID-360: LiDAR at 10 Hz and IMU at 200 Hz. Each video shows point clouds assembled using the corresponding ground-truth trajectory, allowing visual inspection of the spatial consistency of the reconstructed scene.</p>
+      <p class="intro">Captured with a Livox MID-360: LiDAR at 10 Hz and IMU at 200 Hz. Each video shows point clouds assembled using the corresponding ground-truth trajectory, allowing visual inspection of the spatial consistency of the reconstructed scene. All videos in this section are shown at <strong>20&times; speed</strong>.</p>
       <div class="method-note"><h3>How the reference trajectories were created</h3><p>As described in the paper, undistorted scans were manually aligned with a precise survey map created by a mobile mapping system. Point cloud registration errors and IMU errors were then jointly optimized in a batch. IMU measurements were used to create the reference trajectories; the proposed odometry method uses LiDAR measurements only.</p><p class="note">These reconstructions provide a qualitative check of reference alignment. They do not independently quantify ground-truth accuracy.</p></div>
 
 <section class="sequence-group" data-environment="room" aria-labelledby="room-title"><div class="group-heading"><h3 id="room-title">Room</h3><p>Indoor · static environment <span aria-hidden="true">/</span> Aggressive sensor motion inside a room.</p></div><div class="sequence-grid">
