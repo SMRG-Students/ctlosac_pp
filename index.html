@@ -16,7 +16,6 @@
   </header>
   <main class="wrap">
     <section id="demo" aria-labelledby="demo-title">
-      <div class="section-heading"><div><h2 id="demo-title">Supplementary video</h2></div></div>
       <figure class="hero-video">
         <video controls playsinline preload="none" poster="images/processed/ral2026_video.jpg" aria-label="Supplementary video: continuous-time LiDAR odometry">
           <source src="images/processed/ral2026_video.mp4" type="video/mp4">
@@ -40,8 +39,6 @@
       <h2 id="dataset-title">In-house dataset</h2>
       <p class="intro">Captured with a Livox MID-360: LiDAR at 10 Hz and IMU at 200 Hz. Each video shows point clouds assembled using the corresponding ground-truth trajectory, allowing visual inspection of the spatial consistency of the reconstructed scene.</p>
       <div class="method-note"><h3>How the reference trajectories were created</h3><p>As described in the paper, undistorted scans were manually aligned with a precise survey map created by a mobile mapping system. Point cloud registration errors and IMU errors were then jointly optimized in a batch. IMU measurements were used to create the reference trajectories; the proposed odometry method uses LiDAR measurements only.</p><p class="note">These reconstructions provide a qualitative check of reference alignment. They do not independently quantify ground-truth accuracy.</p></div>
-      <div class="gallery-toolbar"><div class="filters" role="group" aria-label="Filter sequences by environment"><button type="button" data-filter="all" aria-pressed="true">All sequences <span>9</span></button><button type="button" data-filter="room" aria-pressed="false">Room <span>3</span></button><button type="button" data-filter="garden" aria-pressed="false">Garden <span>3</span></button><button type="button" data-filter="walk" aria-pressed="false">Walk <span>3</span></button></div></div>
-      <p class="gallery-note">Ground-truth reconstructions · Playback skips the first and last 2 seconds of each sequence, at the original speed. Full recordings are available via the original MP4 links.</p>
 
 <section class="sequence-group" data-environment="room" aria-labelledby="room-title"><div class="group-heading"><h3 id="room-title">Room</h3><p>Indoor · static environment <span aria-hidden="true">/</span> Aggressive sensor motion inside a room.</p></div><div class="sequence-grid">
 <article class="sequence-card"><div class="card-video"><video data-trim-start="2" data-trim-end="2" controls playsinline preload="none" poster="images/processed/room1.jpg" aria-label="room.01: ground-truth point cloud reconstruction"><source src="images/processed/room1.mp4" type="video/mp4">Your browser does not support embedded video. <a href="images/demo/room1-2026-11-02_15.46.19.mp4">Download room.01</a>.</video></div><div class="card-caption"><div><h4>room.01</h4><p>Ground-truth reconstruction</p></div><a href="images/demo/room1-2026-11-02_15.46.19.mp4" aria-label="Open original MP4 for room.01">Original <span aria-hidden="true">→</span></a></div></article>
