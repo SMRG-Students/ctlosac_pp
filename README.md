@@ -36,3 +36,28 @@ independent numerical accuracy measurement. Environment filters and exclusive
 video playback are progressive enhancements; all sequences remain accessible
 without JavaScript. Videos load only when requested, with original-file links
 available on every card.
+
+## Set sequence playback boundaries in HTML
+
+Each in-house sequence player in `index.html` specifies seconds to skip:
+
+```html
+<video data-trim-start="2" data-trim-end="2" controls playsinline ...>
+```
+
+`data-trim-start` skips seconds from the beginning; `data-trim-end` skips
+seconds from the end (not an absolute timestamp). Change these independently
+for each sequence; use `0` to keep an endpoint. Keep their sum below the video
+duration. Invalid ranges fall back to full playback. Update the gallery note
+if the displayed trimming policy changes.
+
+JavaScript starts playback at the configured boundary, restricts seeking to
+the selected range, pauses at its end, and restarts from the selected beginning
+when Play is pressed again. Native controls still display the full file's
+timeline. Without JavaScript the full recording plays. Video files and original
+links are unchanged, and the supplementary demo is not trimmed.
+
+Playback boundaries require hosting with HTTP byte-range support, as provided
+by GitHub Pages. Python's basic `http.server` can serve the page for layout
+checks but does not support reliable media seeking; validate trimming on a
+server that responds to media Range requests with HTTP 206.
