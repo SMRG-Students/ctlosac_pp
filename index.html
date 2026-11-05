@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQBJEYWXE0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-ZQBJEYWXE0');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        processEscapes: true
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+  <title>Continuous-time LiDAR Odometry with Correponsence-free Locally Optimized MSAC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css?v=20260928-1552">
+  <script src="https://kit.fontawesome.com/f47cb5070b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container my-5">
+
+    <!-- Title -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2>
+          Continuous-time LiDAR Odometry with <br>
+          Corresopndence-free Locally Optimized MSAC
+        </h2>
+      </div>
+    </div>
+
+    <!-- Venue -->
+    <div class="row mt-2">
+      <div class="col-12 text-center">
+        <h5 class="text-muted">IEEE Robotics and Automation Letters (RA-L) 2026</h5>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- I2P Results -->
+    <section aria-labelledby="i2p-results-title">
+      <div class="row g-4 justify-content-center">
+        <figure class="col-md-6 mb-0">
+          <div class="ratio ratio-16x9 demo-frame">
+            <img src="images/demo/ral2026_video.mp4">
+          </div>
+          <figcaption class="text-center mt-2 fs-5">In-house Dataset</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <hr class="my-4">
+
+    <!-- Abstract -->
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3 text-center">Abstract</h4>
+        <p class="text-justify">
+          This work presents a continuous-time LiDAR odometry method with GPU-accelerated locally optimized MSAC (LO-MSAC) that can deal with the sensitivity to initialization of continuous-time ICP caused by motion distortion. 
+          Point clouds acquired by a LiDAR with a sweeping mechanism or a rolling-shutter mechanism can be severely distorted under aggressive motion during scanning. 
+          Conventional rigid point cloud registration methods require prior deskewing to obtain an accurate motion estimate, whereas continuous-time ICP jointly optimizes the trajectory during scanning while enforcing spatial and temporal consistency. 
+          In practice, however, continuous-time ICP is sensitive to the initial guess and its optimization can be unstable. 
+          To obtain a reliable initialization, the proposed method performs LO-MSAC with a large number of hypotheses (e.g., 50,000), which runs continuous-time ICP optimization without explicit correspondence estimation for each pose hypothesis by leveraging GPU parallelism. 
+          Experiments demonstrate that the proposed method robustly estimates the sensor trajectory even under aggressive motion in real-time, using only LiDAR measurements. 
+          We release the code of the proposed method and in-house dataset upon acceptance of the paper.
+        </p>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- System Overview -->
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3 text-center">System Overview</h4>
+        <p class="text-justify">
+          Given $N$ inputs comprising RGB images, LiDAR point clouds, and optional geometric cues, LiV3R projects each modality into a shared latent space using modality-specific encoders. Each LiDAR scan is preprocessed into a single-channel intensity image together with ray directions, depth, and a sparsity mask; these signals are stacked and jointly fed into the LiDAR encoder. We investigate four LiDAR encoding variants, shown in (a)–(d), to identify the most effective way to incorporate intensity, geometry, and sparsity.
+        </p>
+        <figure class="system-overview-figure">
+          <a href="images/systemoverview.pdf" target="_blank" rel="noopener" aria-label="Open the System Overview figure as a PDF">
+            <img src="images/systemoverview.png" alt="LiV3R system overview and four LiDAR encoding variants" class="system-overview-image" width="2723" height="1098">
+          </a>
+          <figcaption class="mt-2 text-center text-muted small">
+            Overview of LiV3R and the four LiDAR encoder variants.
+            <a href="images/systemoverview.pdf" target="_blank" rel="noopener">Open the full-resolution PDF</a>.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Registration Demos -->
+    <section aria-labelledby="registration-demos-title">
+      <h4 id="registration-demos-title" class="mb-4 text-center">Registration Demos</h4>
+
+      <section class="demo-scene mb-5" aria-labelledby="in-house-dataset-title">
+        <h5 id="in-house-dataset-title" class="demo-scene-title">In-house Dataset</h5>
+
+        <section class="demo-environment" aria-labelledby="in-house-indoor-title">
+          <h6 id="in-house-indoor-title" class="demo-environment-title">Indoor</h6>
+
+          <article class="demo-task">
+            <h6 class="demo-task-title">Image-to-Image</h6>
+            <div class="demo-pair" role="group" aria-label="In-house Dataset Indoor I2I input and result">
+              <div class="demo-pair-media demo-input-media">
+                <span class="demo-media-label">Input</span>
+                <img src="images/demo/in_house_dataset_i2i_input.png" alt="In-house Dataset Indoor I2I input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+              <div class="demo-pair-media demo-result-media">
+                <span class="demo-media-label">Result</span>
+                <img src="images/demo/icra2027_in_house_dataset_i2i.gif" alt="In-house Dataset Indoor I2I registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </article>
+
+          <article class="demo-task">
+            <h6 class="demo-task-title">Image-to-Point cloud</h6>
+            <div class="demo-pair" role="group" aria-label="In-house Dataset Indoor I2P input and result">
+              <div class="demo-pair-media demo-input-media">
+                <span class="demo-media-label">Input</span>
+                <img src="images/demo/in_house_dataset_i2p_input.png" alt="In-house Dataset Indoor I2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+              <div class="demo-pair-media demo-result-media">
+                <span class="demo-media-label">Result</span>
+                <img src="images/demo/icra2027_in_house_dataset_i2p.gif" alt="In-house Dataset Indoor I2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </article>
+
+          <article class="demo-task mb-0">
+            <h6 class="demo-task-title">Point cloud-to-Point cloud</h6>
+            <div class="demo-pair" role="group" aria-label="In-house Dataset Indoor P2P input and result">
+              <div class="demo-pair-media demo-input-media">
+                <span class="demo-media-label">Input</span>
+                <img src="images/demo/in_house_dataset_p2p_input.png" alt="In-house Dataset Indoor P2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+              <div class="demo-pair-media demo-result-media">
+                <span class="demo-media-label">Result</span>
+                <img src="images/demo/icra2027_in_house_dataset_p2p.gif" alt="In-house Dataset Indoor P2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="demo-environment" aria-labelledby="in-house-outdoor-title">
+          <h6 id="in-house-outdoor-title" class="demo-environment-title">Outdoor</h6>
+
+          <article class="demo-task">
+            <h6 class="demo-task-title">Image-to-Image</h6>
+            <div class="demo-pair" role="group" aria-label="In-house Dataset Outdoor I2I input and result">
+              <div class="demo-pair-media demo-input-media">
+                <span class="demo-media-label">Input</span>
+                <img src="images/demo/in_house_dataset_outdoor_i2i_input.png" alt="In-house Dataset Outdoor I2I input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+              <div class="demo-pair-media demo-result-media">
+                <span class="demo-media-label">Result</span>
+                <img src="images/demo/icra2027_in_house_dataset_outdoor_i2i.gif" alt="In-house Dataset Outdoor I2I registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </article>
+
+          <article class="demo-task">
+            <h6 class="demo-task-title">Image-to-Point cloud</h6>
+            <div class="demo-pair" role="group" aria-label="In-house Dataset Outdoor I2P input and result">
+              <div class="demo-pair-media demo-input-media">
+                <span class="demo-media-label">Input</span>
+                <img src="images/demo/in_house_dataset_outdoor_i2p_input.png" alt="In-house Dataset Outdoor I2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+              <div class="demo-pair-media demo-result-media">
+                <span class="demo-media-label">Result</span>
+                <img src="images/demo/icra2027_in_house_dataset_outdoor_i2p.gif" alt="In-house Dataset Outdoor I2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </article>
+
+          <article class="demo-task mb-0">
+            <h6 class="demo-task-title">Point cloud-to-Point cloud</h6>
+            <div class="demo-pair" role="group" aria-label="In-house Dataset Outdoor P2P input and result">
+              <div class="demo-pair-media demo-input-media">
+                <span class="demo-media-label">Input</span>
+                <img src="images/demo/in_house_dataset_outdoor_p2p_input.png" alt="In-house Dataset Outdoor P2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+              <div class="demo-pair-media demo-result-media">
+                <span class="demo-media-label">Result</span>
+                <img src="images/demo/icra2027_in_house_dataset_outdoor_p2p.gif" alt="In-house Dataset Outdoor P2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <section class="demo-scene" aria-labelledby="r3live-dataset-title">
+        <h5 id="r3live-dataset-title" class="demo-scene-title">
+          R3LIVE Dataset
+          <sup><a href="https://arxiv.org/abs/2109.07982" target="_blank" rel="noopener noreferrer" aria-label="R3LIVE paper on arXiv">[1]</a></sup>
+        </h5>
+
+        <article class="demo-task">
+          <h6 class="demo-task-title">Image-to-Image</h6>
+          <div class="demo-pair" role="group" aria-label="R3LIVE Dataset I2I input and result">
+            <div class="demo-pair-media demo-input-media">
+              <span class="demo-media-label">Input</span>
+              <img src="images/demo/r3live_dataset_i2i_input.png" alt="R3LIVE Dataset I2I input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+            </div>
+            <div class="demo-pair-media demo-result-media">
+              <span class="demo-media-label">Result</span>
+              <img src="images/demo/icra2027_r3live_dataset_i2i.gif" alt="R3LIVE Dataset I2I registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+            </div>
+          </div>
+        </article>
+
+        <article class="demo-task">
+          <h6 class="demo-task-title">Image-to-Point cloud</h6>
+          <div class="demo-pair" role="group" aria-label="R3LIVE Dataset I2P input and result">
+            <div class="demo-pair-media demo-input-media">
+              <span class="demo-media-label">Input</span>
+              <img src="images/demo/r3live_dataset_i2p_input.png" alt="R3LIVE Dataset I2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+            </div>
+            <div class="demo-pair-media demo-result-media">
+              <span class="demo-media-label">Result</span>
+              <img src="images/demo/icra2027_r3live_dataset_i2p.gif" alt="R3LIVE Dataset I2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+            </div>
+          </div>
+        </article>
+
+        <article class="demo-task mb-0">
+          <h6 class="demo-task-title">Point cloud-to-Point cloud</h6>
+          <div class="demo-pair" role="group" aria-label="R3LIVE Dataset P2P input and result">
+            <div class="demo-pair-media demo-input-media">
+              <span class="demo-media-label">Input</span>
+              <img src="images/demo/r3live_dataset_p2p_input.png" alt="R3LIVE Dataset P2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+            </div>
+            <div class="demo-pair-media demo-result-media">
+              <span class="demo-media-label">Result</span>
+              <img src="images/demo/icra2027_r3live_dataset_p2p.gif" alt="R3LIVE Dataset P2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
+            </div>
+          </div>
+        </article>
+      </section>
+    </section>
+
+    <!-- Video (placeholder, uncomment when ready) -->
+    <!--
+    <hr class="my-4">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3">Video</h4>
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Supplementary Video" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    -->
+
+    <br><br>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
