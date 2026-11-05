@@ -26,13 +26,19 @@
         <figcaption>The proposed method under aggressive sensor motion. <a href="images/demo/ral2026_video.mp4">Original MP4</a></figcaption>
       </figure>
     </section>
-    <section class="abstract" aria-labelledby="abstract-title"><p class="eyebrow">Overview</p><h2 id="abstract-title">Abstract</h2><p>This work presents a continuous-time LiDAR odometry method with GPU-accelerated locally optimized MSAC (LO-MSAC) that can deal with the sensitivity to initialization of continuous-time ICP caused by motion distortion.
-          Point clouds acquired by a LiDAR with a sweeping mechanism or a rolling-shutter mechanism can be severely distorted under aggressive motion during scanning.
-          Conventional rigid point cloud registration methods require prior deskewing to obtain an accurate motion estimate, whereas continuous-time ICP jointly optimizes the trajectory during scanning while enforcing spatial and temporal consistency.
-          In practice, however, continuous-time ICP is sensitive to the initial guess and its optimization can be unstable.
-          To obtain a reliable initialization, the proposed method performs LO-MSAC with a large number of hypotheses (e.g., 50,000), which runs continuous-time ICP optimization without explicit correspondence estimation for each pose hypothesis by leveraging GPU parallelism.
-          Experiments demonstrate that the proposed method robustly estimates the sensor trajectory even under aggressive motion in real-time, using only LiDAR measurements.
-          We release the code of the proposed method and in-house dataset upon acceptance of the paper.</p></section>
+    <section class="abstract" aria-labelledby="abstract-title">
+      <p class="eyebrow">Overview</p>
+      <h2 id="abstract-title">Abstract</h2>
+      <p>
+        This work presents a continuous-time LiDAR odometry method with GPU-accelerated locally optimized MSAC (LO-MSAC) that can deal with the sensitivity to initialization of continuous-time ICP caused by motion distortion.
+        Point clouds acquired by a LiDAR with a sweeping mechanism or a rolling-shutter mechanism can be severely distorted under aggressive motion during scanning.
+        Conventional rigid point cloud registration methods require prior deskewing to obtain an accurate motion estimate, whereas continuous-time ICP jointly optimizes the trajectory during scanning while enforcing spatial and temporal consistency.
+        In practice, however, continuous-time ICP is sensitive to the initial guess and its optimization can be unstable.
+        To obtain a reliable initialization, the proposed method performs LO-MSAC with a large number of hypotheses (e.g., 50,000), which runs continuous-time ICP optimization without explicit correspondence estimation for each pose hypothesis by leveraging GPU parallelism.
+        Experiments demonstrate that the proposed method robustly estimates the sensor trajectory even under aggressive motion in real-time, using only LiDAR measurements.
+        We release the code of the proposed method and in-house dataset upon acceptance of the paper.
+      </p>
+    </section>
     <section id="dataset" aria-labelledby="dataset-title">
       <div class="section-heading"><div><p class="eyebrow">A closer look at the reference data</p><h2 id="dataset-title">In-house dataset</h2></div><span class="tag">3 environments · 9 sequences</span></div>
       <p class="intro">Captured with a Livox MID-360: LiDAR at 10 Hz and IMU at 200 Hz. Each video shows point clouds assembled using the corresponding ground-truth reference trajectory, allowing visual inspection of the spatial consistency of the reconstructed scene.</p>
