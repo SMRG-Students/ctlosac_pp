@@ -1,0 +1,62 @@
+[
+  {
+    "id": "garden1",
+    "source": "garden1-2026-11-02_15.42.00.mp4",
+    "duration": 14.466667,
+    "bytes": 1108480
+  },
+  {
+    "id": "garden2",
+    "source": "garden2-2026-11-02_15.43.07.mp4",
+    "duration": 12.166667,
+    "bytes": 1041592
+  },
+  {
+    "id": "garden3",
+    "source": "garden3-2026-11-02_15.44.36.mp4",
+    "duration": 13.966667,
+    "bytes": 977864
+  },
+  {
+    "id": "ral2026_video",
+    "source": "ral2026_video.mp4",
+    "duration": 77.4,
+    "bytes": 10737676
+  },
+  {
+    "id": "room1",
+    "source": "room1-2026-11-02_15.46.19.mp4",
+    "duration": 18.466667,
+    "bytes": 2212793
+  },
+  {
+    "id": "room2",
+    "source": "room2-2026-11-02_15.47.31.mp4",
+    "duration": 19.666667,
+    "bytes": 2326084
+  },
+  {
+    "id": "room3",
+    "source": "room3-2026-11-02_15.48.31.mp4",
+    "duration": 15.2,
+    "bytes": 2043806
+  },
+  {
+    "id": "walk1",
+    "source": "walk1-2026-11-02_14.49.29.mp4",
+    "duration": 54.1,
+    "bytes": 1260515
+  },
+  {
+    "id": "walk2",
+    "source": "walk2-2026-11-02_15.11.33.mp4",
+    "duration": 50.5,
+    "bytes": 843907
+  },
+  {
+    "id": "walk3",
+    "source": "walk3-2026-11-02_14.58.33.mp4",
+    "duration": 25.266667,
+    "bytes": 597456
+  }
+]

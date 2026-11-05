@@ -1,280 +1,58 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQBJEYWXE0"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-ZQBJEYWXE0');
-  </script>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        processEscapes: true
-      }
-    };
-  </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
-  <title>Continuous-time LiDAR Odometry with Correponsence-free Locally Optimized MSAC</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <link rel="stylesheet" href="styles.css?v=20260928-1552">
-  <script src="https://kit.fontawesome.com/f47cb5070b.js" crossorigin="anonymous"></script>
+  <meta name="description" content="Continuous-time LiDAR odometry with correspondence-free locally optimized MSAC. Supplementary video and ground-truth point-cloud reconstructions for all nine in-house sequences.">
+  <title>Continuous-time LiDAR Odometry with Correspondence-free Locally Optimized MSAC</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
 </head>
-
 <body>
-  <div class="container my-5">
-
-    <!-- Title -->
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2>
-          Continuous-time LiDAR Odometry with <br>
-          Corresopndence-free Locally Optimized MSAC
-        </h2>
-      </div>
-    </div>
-
-    <!-- Venue -->
-    <div class="row mt-2">
-      <div class="col-12 text-center">
-        <h5 class="text-muted">IEEE Robotics and Automation Letters (RA-L) 2026</h5>
-      </div>
-    </div>
-
-    <hr class="my-4">
-
-    <!-- I2P Results -->
-    <section aria-labelledby="i2p-results-title">
-      <div class="row g-4 justify-content-center">
-        <figure class="col-md-6 mb-0">
-          <div class="ratio ratio-16x9 demo-frame">
-            <img src="images/demo/ral2026_video.mp4">
-          </div>
-          <figcaption class="text-center mt-2 fs-5">In-house Dataset</figcaption>
-        </figure>
-      </div>
+  <header class="hero wrap">
+    <p class="eyebrow">IEEE Robotics and Automation Letters · 2026</p>
+    <h1>Continuous-time LiDAR Odometry with<br> Correspondence-free Locally Optimized MSAC</h1>
+    <p class="subtitle">Robust LiDAR-only motion estimation under aggressive motion.</p>
+    <nav aria-label="Page sections"><a href="#demo">Watch the demo <span aria-hidden="true">→</span></a><a href="#dataset">Explore the dataset <span aria-hidden="true">↓</span></a></nav>
+  </header>
+  <main class="wrap">
+    <section id="demo" aria-labelledby="demo-title">
+      <div class="section-heading"><div><p class="eyebrow">Method in motion</p><h2 id="demo-title">Supplementary video</h2></div><span class="tag">LiDAR-only odometry</span></div>
+      <figure class="hero-video">
+        <video controls playsinline preload="none" poster="images/processed/ral2026_video.jpg" aria-label="Supplementary video: continuous-time LiDAR odometry">
+          <source src="images/processed/ral2026_video.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="images/demo/ral2026_video.mp4">Download the supplementary video</a>.
+        </video>
+        <figcaption>The proposed method under aggressive sensor motion. <a href="images/demo/ral2026_video.mp4">Original MP4</a></figcaption>
+      </figure>
     </section>
+    <section class="abstract" aria-labelledby="abstract-title"><p class="eyebrow">Overview</p><h2 id="abstract-title">Abstract</h2><p>This work presents a continuous-time LiDAR odometry method with GPU-accelerated locally optimized MSAC (LO-MSAC) that can deal with the sensitivity to initialization of continuous-time ICP caused by motion distortion.
+          Point clouds acquired by a LiDAR with a sweeping mechanism or a rolling-shutter mechanism can be severely distorted under aggressive motion during scanning.
+          Conventional rigid point cloud registration methods require prior deskewing to obtain an accurate motion estimate, whereas continuous-time ICP jointly optimizes the trajectory during scanning while enforcing spatial and temporal consistency.
+          In practice, however, continuous-time ICP is sensitive to the initial guess and its optimization can be unstable.
+          To obtain a reliable initialization, the proposed method performs LO-MSAC with a large number of hypotheses (e.g., 50,000), which runs continuous-time ICP optimization without explicit correspondence estimation for each pose hypothesis by leveraging GPU parallelism.
+          Experiments demonstrate that the proposed method robustly estimates the sensor trajectory even under aggressive motion in real-time, using only LiDAR measurements.
+          We release the code of the proposed method and in-house dataset upon acceptance of the paper.</p></section>
+    <section id="dataset" aria-labelledby="dataset-title">
+      <div class="section-heading"><div><p class="eyebrow">A closer look at the reference data</p><h2 id="dataset-title">In-house dataset</h2></div><span class="tag">3 environments · 9 sequences</span></div>
+      <p class="intro">Captured with a Livox MID-360: LiDAR at 10 Hz and IMU at 200 Hz. Each video shows point clouds assembled using the corresponding ground-truth reference trajectory, allowing visual inspection of the spatial consistency of the reconstructed scene.</p>
+      <div class="method-note"><h3>How the reference trajectories were created</h3><p>As described in the paper, undistorted scans were manually aligned with a precise survey map created by a mobile mapping system. Point-cloud registration errors and IMU errors were then jointly optimized in a batch. IMU measurements were used to create the reference trajectories; the proposed odometry method uses LiDAR measurements only.</p><p class="note">These reconstructions provide a qualitative check of reference alignment. They do not independently quantify ground-truth accuracy.</p></div>
+      <div class="gallery-toolbar"><div class="filters" role="group" aria-label="Filter sequences by environment"><button type="button" data-filter="all" aria-pressed="true">All sequences <span>9</span></button><button type="button" data-filter="room" aria-pressed="false">Room <span>3</span></button><button type="button" data-filter="garden" aria-pressed="false">Garden <span>3</span></button><button type="button" data-filter="walk" aria-pressed="false">Walk <span>3</span></button></div><p id="sequence-count" role="status">Showing all 9 sequences</p></div>
+      <p class="gallery-note">Ground-truth reconstructions · Full recordings at the original playback speed. Web copies are resized and compressed; original MP4s are available for closer inspection.</p>
 
-    <hr class="my-4">
-
-    <!-- Abstract -->
-    <div class="row">
-      <div class="col-12">
-        <h4 class="mb-3 text-center">Abstract</h4>
-        <p class="text-justify">
-          This work presents a continuous-time LiDAR odometry method with GPU-accelerated locally optimized MSAC (LO-MSAC) that can deal with the sensitivity to initialization of continuous-time ICP caused by motion distortion. 
-          Point clouds acquired by a LiDAR with a sweeping mechanism or a rolling-shutter mechanism can be severely distorted under aggressive motion during scanning. 
-          Conventional rigid point cloud registration methods require prior deskewing to obtain an accurate motion estimate, whereas continuous-time ICP jointly optimizes the trajectory during scanning while enforcing spatial and temporal consistency. 
-          In practice, however, continuous-time ICP is sensitive to the initial guess and its optimization can be unstable. 
-          To obtain a reliable initialization, the proposed method performs LO-MSAC with a large number of hypotheses (e.g., 50,000), which runs continuous-time ICP optimization without explicit correspondence estimation for each pose hypothesis by leveraging GPU parallelism. 
-          Experiments demonstrate that the proposed method robustly estimates the sensor trajectory even under aggressive motion in real-time, using only LiDAR measurements. 
-          We release the code of the proposed method and in-house dataset upon acceptance of the paper.
-        </p>
-      </div>
-    </div>
-
-    <hr class="my-4">
-
-    <!-- System Overview -->
-    <div class="row">
-      <div class="col-12">
-        <h4 class="mb-3 text-center">System Overview</h4>
-        <p class="text-justify">
-          Given $N$ inputs comprising RGB images, LiDAR point clouds, and optional geometric cues, LiV3R projects each modality into a shared latent space using modality-specific encoders. Each LiDAR scan is preprocessed into a single-channel intensity image together with ray directions, depth, and a sparsity mask; these signals are stacked and jointly fed into the LiDAR encoder. We investigate four LiDAR encoding variants, shown in (a)–(d), to identify the most effective way to incorporate intensity, geometry, and sparsity.
-        </p>
-        <figure class="system-overview-figure">
-          <a href="images/systemoverview.pdf" target="_blank" rel="noopener" aria-label="Open the System Overview figure as a PDF">
-            <img src="images/systemoverview.png" alt="LiV3R system overview and four LiDAR encoding variants" class="system-overview-image" width="2723" height="1098">
-          </a>
-          <figcaption class="mt-2 text-center text-muted small">
-            Overview of LiV3R and the four LiDAR encoder variants.
-            <a href="images/systemoverview.pdf" target="_blank" rel="noopener">Open the full-resolution PDF</a>.
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <hr class="my-4">
-
-    <!-- Registration Demos -->
-    <section aria-labelledby="registration-demos-title">
-      <h4 id="registration-demos-title" class="mb-4 text-center">Registration Demos</h4>
-
-      <section class="demo-scene mb-5" aria-labelledby="in-house-dataset-title">
-        <h5 id="in-house-dataset-title" class="demo-scene-title">In-house Dataset</h5>
-
-        <section class="demo-environment" aria-labelledby="in-house-indoor-title">
-          <h6 id="in-house-indoor-title" class="demo-environment-title">Indoor</h6>
-
-          <article class="demo-task">
-            <h6 class="demo-task-title">Image-to-Image</h6>
-            <div class="demo-pair" role="group" aria-label="In-house Dataset Indoor I2I input and result">
-              <div class="demo-pair-media demo-input-media">
-                <span class="demo-media-label">Input</span>
-                <img src="images/demo/in_house_dataset_i2i_input.png" alt="In-house Dataset Indoor I2I input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-              <div class="demo-pair-media demo-result-media">
-                <span class="demo-media-label">Result</span>
-                <img src="images/demo/icra2027_in_house_dataset_i2i.gif" alt="In-house Dataset Indoor I2I registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-            </div>
-          </article>
-
-          <article class="demo-task">
-            <h6 class="demo-task-title">Image-to-Point cloud</h6>
-            <div class="demo-pair" role="group" aria-label="In-house Dataset Indoor I2P input and result">
-              <div class="demo-pair-media demo-input-media">
-                <span class="demo-media-label">Input</span>
-                <img src="images/demo/in_house_dataset_i2p_input.png" alt="In-house Dataset Indoor I2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-              <div class="demo-pair-media demo-result-media">
-                <span class="demo-media-label">Result</span>
-                <img src="images/demo/icra2027_in_house_dataset_i2p.gif" alt="In-house Dataset Indoor I2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-            </div>
-          </article>
-
-          <article class="demo-task mb-0">
-            <h6 class="demo-task-title">Point cloud-to-Point cloud</h6>
-            <div class="demo-pair" role="group" aria-label="In-house Dataset Indoor P2P input and result">
-              <div class="demo-pair-media demo-input-media">
-                <span class="demo-media-label">Input</span>
-                <img src="images/demo/in_house_dataset_p2p_input.png" alt="In-house Dataset Indoor P2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-              <div class="demo-pair-media demo-result-media">
-                <span class="demo-media-label">Result</span>
-                <img src="images/demo/icra2027_in_house_dataset_p2p.gif" alt="In-house Dataset Indoor P2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-            </div>
-          </article>
-        </section>
-
-        <section class="demo-environment" aria-labelledby="in-house-outdoor-title">
-          <h6 id="in-house-outdoor-title" class="demo-environment-title">Outdoor</h6>
-
-          <article class="demo-task">
-            <h6 class="demo-task-title">Image-to-Image</h6>
-            <div class="demo-pair" role="group" aria-label="In-house Dataset Outdoor I2I input and result">
-              <div class="demo-pair-media demo-input-media">
-                <span class="demo-media-label">Input</span>
-                <img src="images/demo/in_house_dataset_outdoor_i2i_input.png" alt="In-house Dataset Outdoor I2I input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-              <div class="demo-pair-media demo-result-media">
-                <span class="demo-media-label">Result</span>
-                <img src="images/demo/icra2027_in_house_dataset_outdoor_i2i.gif" alt="In-house Dataset Outdoor I2I registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-            </div>
-          </article>
-
-          <article class="demo-task">
-            <h6 class="demo-task-title">Image-to-Point cloud</h6>
-            <div class="demo-pair" role="group" aria-label="In-house Dataset Outdoor I2P input and result">
-              <div class="demo-pair-media demo-input-media">
-                <span class="demo-media-label">Input</span>
-                <img src="images/demo/in_house_dataset_outdoor_i2p_input.png" alt="In-house Dataset Outdoor I2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-              <div class="demo-pair-media demo-result-media">
-                <span class="demo-media-label">Result</span>
-                <img src="images/demo/icra2027_in_house_dataset_outdoor_i2p.gif" alt="In-house Dataset Outdoor I2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-            </div>
-          </article>
-
-          <article class="demo-task mb-0">
-            <h6 class="demo-task-title">Point cloud-to-Point cloud</h6>
-            <div class="demo-pair" role="group" aria-label="In-house Dataset Outdoor P2P input and result">
-              <div class="demo-pair-media demo-input-media">
-                <span class="demo-media-label">Input</span>
-                <img src="images/demo/in_house_dataset_outdoor_p2p_input.png" alt="In-house Dataset Outdoor P2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-              <div class="demo-pair-media demo-result-media">
-                <span class="demo-media-label">Result</span>
-                <img src="images/demo/icra2027_in_house_dataset_outdoor_p2p.gif" alt="In-house Dataset Outdoor P2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-              </div>
-            </div>
-          </article>
-        </section>
-      </section>
-
-      <section class="demo-scene" aria-labelledby="r3live-dataset-title">
-        <h5 id="r3live-dataset-title" class="demo-scene-title">
-          R3LIVE Dataset
-          <sup><a href="https://arxiv.org/abs/2109.07982" target="_blank" rel="noopener noreferrer" aria-label="R3LIVE paper on arXiv">[1]</a></sup>
-        </h5>
-
-        <article class="demo-task">
-          <h6 class="demo-task-title">Image-to-Image</h6>
-          <div class="demo-pair" role="group" aria-label="R3LIVE Dataset I2I input and result">
-            <div class="demo-pair-media demo-input-media">
-              <span class="demo-media-label">Input</span>
-              <img src="images/demo/r3live_dataset_i2i_input.png" alt="R3LIVE Dataset I2I input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-            </div>
-            <div class="demo-pair-media demo-result-media">
-              <span class="demo-media-label">Result</span>
-              <img src="images/demo/icra2027_r3live_dataset_i2i.gif" alt="R3LIVE Dataset I2I registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-            </div>
-          </div>
-        </article>
-
-        <article class="demo-task">
-          <h6 class="demo-task-title">Image-to-Point cloud</h6>
-          <div class="demo-pair" role="group" aria-label="R3LIVE Dataset I2P input and result">
-            <div class="demo-pair-media demo-input-media">
-              <span class="demo-media-label">Input</span>
-              <img src="images/demo/r3live_dataset_i2p_input.png" alt="R3LIVE Dataset I2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-            </div>
-            <div class="demo-pair-media demo-result-media">
-              <span class="demo-media-label">Result</span>
-              <img src="images/demo/icra2027_r3live_dataset_i2p.gif" alt="R3LIVE Dataset I2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-            </div>
-          </div>
-        </article>
-
-        <article class="demo-task mb-0">
-          <h6 class="demo-task-title">Point cloud-to-Point cloud</h6>
-          <div class="demo-pair" role="group" aria-label="R3LIVE Dataset P2P input and result">
-            <div class="demo-pair-media demo-input-media">
-              <span class="demo-media-label">Input</span>
-              <img src="images/demo/r3live_dataset_p2p_input.png" alt="R3LIVE Dataset P2P input" width="520" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-            </div>
-            <div class="demo-pair-media demo-result-media">
-              <span class="demo-media-label">Result</span>
-              <img src="images/demo/icra2027_r3live_dataset_p2p.gif" alt="R3LIVE Dataset P2P registration result" width="680" style="display:block; width:100%; max-width:100%; height:auto;" loading="lazy" decoding="async">
-            </div>
-          </div>
-        </article>
-      </section>
-    </section>
-
-    <!-- Video (placeholder, uncomment when ready) -->
-    <!--
-    <hr class="my-4">
-    <div class="row">
-      <div class="col-12">
-        <h4 class="mb-3">Video</h4>
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Supplementary Video" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    -->
-
-    <br><br>
-
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-    crossorigin="anonymous"></script>
-  <script src="main.js"></script>
-</body>
-
-</html>
+<section class="sequence-group" data-environment="room" aria-labelledby="room-title"><div class="group-heading"><h3 id="room-title">Room</h3><p>Indoor · static environment <span aria-hidden="true">/</span> Aggressive sensor motion inside a room.</p></div><div class="sequence-grid">
+<article class="sequence-card"><div class="card-video"><video controls playsinline preload="none" poster="images/processed/room1.jpg" aria-label="room.01: ground-truth point-cloud reconstruction"><source src="images/processed/room1.mp4" type="video/mp4">Your browser does not support embedded video. <a href="images/demo/room1-2026-11-02_15.46.19.mp4">Download room.01</a>.</video></div><div class="card-caption"><div><h4>room.01</h4><p>Ground-truth reconstruction</p></div><a href="images/demo/room1-2026-11-02_15.46.19.mp4" aria-label="Open original MP4 for room.01">Original <span aria-hidden="true">→</span></a></div></article>
+<article class="sequence-card"><div class="card-video"><video controls playsinline preload="none" poster="images/processed/room2.jpg" aria-label="room.02: ground-truth point-cloud reconstruction"><source src="images/processed/room2.mp4" type="video/mp4">Your browser does not support embedded video. <a href="images/demo/room2-2026-11-02_15.47.31.mp4">Download room.02</a>.</video></div><div class="card-caption"><div><h4>room.02</h4><p>Ground-truth reconstruction</p></div><a href="images/demo/room2-2026-11-02_15.47.31.mp4" aria-label="Open original MP4 for room.02">Original <span aria-hidden="true">→</span></a></div></article>
+<article class="sequence-card"><div class="card-video"><video controls playsinline preload="none" poster="images/processed/room3.jpg" aria-label="room.03: ground-truth point-cloud reconstruction"><source src="images/processed/room3.mp4" type="video/mp4">Your browser does not support embedded video. <a href="images/demo/room3-2026-11-02_15.48.31.mp4">Download room.03</a>.</video></div><div class="card-caption"><div><h4>room.03</h4><p>Ground-truth reconstruction</p></div><a href="images/demo/room3-2026-11-02_15.48.31.mp4" aria-label="Open original MP4 for room.03">Original <span aria-hidden="true">→</span></a></div></article>
+</div></section>
+<section class="sequence-group" data-environment="garden" aria-labelledby="garden-title"><div class="group-heading"><h3 id="garden-title">Garden</h3><p>Outdoor · static environment <span aria-hidden="true">/</span> Aggressive sensor motion among buildings and trees.</p></div><div class="sequence-grid">
+<article class="sequence-card"><div class="card-video"><video controls playsinline preload="none" poster="images/processed/garden1.jpg" aria-label="garden.01: ground-truth point-cloud reconstruction"><source src="images/processed/garden1.mp4" type="video/mp4">Your browser does not support embedded video. <a href="images/demo/garden1-2026-11-02_15.42.00.mp4">Download garden.01</a>.</video></div><div class="card-caption"><div><h4>garden.01</h4><p>Ground-truth reconstruction</p></div><a href="images/demo/garden1-2026-11-02_15.42.00.mp4" aria-label="Open original MP4 for garden.01">Original <span aria-hidden="true">→</span></a></div></article>
+<article class="sequence-card"><div class="card-video"><video controls playsinline preload="none" poster="images/processed/garden2.jpg" aria-label="garden.02: ground-truth point-cloud reconstruction"><source src="images/processed/garden2.mp4" type="video/mp4">Your browser does not support embedded video. <a href="images/demo/garden2-2026-11-02_15.43.07.mp4">Download garden.02</a>.</video></div><div class="card-caption"><div><h4>garden.02</h4><p>Ground-truth reconstruction</p></div><a href="images/demo/garden2-2026-11-02_15.43.07.mp4" aria-label="Open original MP4 for garden.02">Original <span aria-hidden="true">→</span></a></div></article>
+<article class="sequence-card"><div class="card-video"><video controls playsinline preload="none" poster="images/processed/garden3.jpg" aria-label="garden.03: ground-truth point-cloud reconstruction"><source src="images/processed/garden3.mp4" type="video/mp4">Your browser does not support embedded video. <a href="images/demo/garden3-2026-11-02_15.44.36.mp4">Download garden.03</a>.</video></div><div class="card-caption"><div><h4>garden.03</h4><p>Ground-truth reconstruction</p></div><a href="images/demo/garden3-2026-11-02_15.44.36.mp4" aria-label="Open original MP4 for garden.03">Original <span aria-hidden="true">→</span></a></div></article>
+</div></section>
+<section class="sequence-group" data-environment="walk" aria-labelledby="walk-title"><div class="group-heading"><h3 id="walk-title">Walk</h3><p>Exploratory mapping <span aria-hidden="true">/</span> Walking while swinging the sensor through changing environments.</p></div><div class="sequence-grid">
+<article class="sequence-card"><div class="card-video"><video controls playsinline preload="none" poster="images/processed/walk1.jpg" aria-label="walk.01: ground-truth point-cloud reconstruction"><source src="images/processed/walk1.mp4" type="video/mp4">Your browser does not support embedded video. <a href="images/demo/walk1-2026-11-02_14.49.29.mp4">Download walk.01</a>.</video></div><div class="card-caption"><div><h4>walk.01</h4><p>Ground-truth reconstruction</p></div><a href="images/demo/walk1-2026-11-02_14.49.29.mp4" aria-label="Open original MP4 for walk.01">Original <span aria-hidden="true">→</span></a></div></article>
+<article class="sequence-card"><div class="card-video"><video controls playsinline preload="none" poster="images/processed/walk2.jpg" aria-label="walk.02: ground-truth point-cloud reconstruction"><source src="images/processed/walk2.mp4" type="video/mp4">Your browser does not support embedded video. <a href="images/demo/walk2-2026-11-02_15.11.33.mp4">Download walk.02</a>.</video></div><div class="card-caption"><div><h4>walk.02</h4><p>Ground-truth reconstruction</p></div><a href="images/demo/walk2-2026-11-02_15.11.33.mp4" aria-label="Open original MP4 for walk.02">Original <span aria-hidden="true">→</span></a></div></article>
+<article class="sequence-card"><div class="card-video"><video controls playsinline preload="none" poster="images/processed/walk3.jpg" aria-label="walk.03: ground-truth point-cloud reconstruction"><source src="images/processed/walk3.mp4" type="video/mp4">Your browser does not support embedded video. <a href="images/demo/walk3-2026-11-02_14.58.33.mp4">Download walk.03</a>.</video></div><div class="card-caption"><div><h4>walk.03</h4><p>Ground-truth reconstruction</p></div><a href="images/demo/walk3-2026-11-02_14.58.33.mp4" aria-label="Open original MP4 for walk.03">Original <span aria-hidden="true">→</span></a></div></article>
+</div></section>
+</section></main><footer class="wrap"><p>Continuous-time LiDAR Odometry with Correspondence-free Locally Optimized MSAC</p><a href="#">Back to top ↑</a></footer></body></html>
