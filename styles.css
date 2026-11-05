@@ -58,3 +58,10 @@ footer p { margin:0; }
 @media(max-width:900px) { .sequence-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .group-heading { display:block; } .group-heading p { margin-top:4px; } }
 @media(max-width:600px) { .wrap { width:calc(100% - 32px); } .hero { padding-block:48px 42px; } h1 br { display:none; } .subtitle { font-size:16px; } h2 { font-size:25px; } .section-heading { display:block; } .tag { display:inline-block; margin-top:12px; } .sequence-grid { grid-template-columns:1fr; gap:16px; } .method-note { padding:20px; } main > section { margin-bottom:42px; } figcaption,footer { display:block; } figcaption a,footer a { display:inline-block; margin-top:8px; } }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+
+.system-figure { margin-top:24px; }
+.system-figure > a { display:block; padding:20px; background:white; border:1px solid var(--line); border-radius:10px; }
+.system-figure img { display:block; width:100%; height:auto; }
+.system-figure figcaption { display:block; }
+.system-figure figcaption p { margin:0 0 8px; text-align:justify; text-justify:inter-word; hyphens:auto; }
+@media(max-width:600px) { .system-figure > a { padding:10px; } }

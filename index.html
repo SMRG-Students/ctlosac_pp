@@ -35,6 +35,18 @@
         We release the code of the proposed method and in-house dataset upon acceptance of the paper.
       </p>
     </section>
+    <section id="system-overview" aria-labelledby="system-overview-title">
+      <h2 id="system-overview-title">System overview</h2>
+      <figure class="system-figure">
+        <a href="images/figures/system.pdf" target="_blank" rel="noopener" aria-label="Open Figure 2: system overview as a full-resolution PDF">
+          <img src="images/figures/system.png" width="2400" height="512" alt="System overview: sampling, sample-wise optimization against a local map, and selection of representative hypothesis poses, followed by refinement and a local-map update." loading="lazy" decoding="async">
+        </a>
+        <figcaption>
+          <p><strong>Figure 2. System overview.</strong> Each sample state passes through sampling, sample-wise optimization using CT-VGICP, and selection based on sample consensus. The selected representative state is refined by scan-to-model registration using a shared local map.</p>
+          <a href="images/figures/system.pdf" target="_blank" rel="noopener">View full-resolution PDF</a>
+        </figcaption>
+      </figure>
+    </section>
     <section id="dataset" aria-labelledby="dataset-title">
       <h2 id="dataset-title">In-house dataset</h2>
       <p class="intro">Captured with a Livox MID-360: LiDAR at 10 Hz and IMU at 200 Hz. Each video shows point clouds assembled using the corresponding ground-truth trajectory, allowing visual inspection of the spatial consistency of the reconstructed scene. All videos in this section are shown at <strong>20&times; speed</strong>.</p>
